@@ -30,7 +30,9 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `correo` VARCHAR(45) NOT NULL,
   `id_rol` BINARY(16) NOT NULL,
   `fecha_hora_creacion` DATETIME NOT NULL,
+  `creado_por` BINARY(16) NOT NULL,
   `fecha_hora_actualizacion` DATETIME NOT NULL,
+  `actualizado_por` BINARY(16) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk-id_rol-usuario-rol_idx` (`id_rol` ASC) VISIBLE,
   CONSTRAINT `fk-id_rol-usuario-rol`
