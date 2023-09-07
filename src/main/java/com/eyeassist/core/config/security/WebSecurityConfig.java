@@ -26,6 +26,7 @@ public class WebSecurityConfig {
         .cors(withDefaults())
         .authorizeHttpRequests(authorize -> authorize
             .requestMatchers("/auth/**").permitAll()
+            .requestMatchers("/videos/**").permitAll()
             .anyRequest().authenticated()
         )
         .sessionManagement(session -> session
