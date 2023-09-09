@@ -13,7 +13,9 @@ public enum Error {
   
   CREDENCIALES_INCORRECTAS(1003, "Las credenciales son incorrectas"),
   
-  VIDEO_NO_EXISTE(1004, "No existe video con ese codigo");
+  VIDEO_NO_EXISTE(1004, "No existe video con ese codigo"),
+  
+  IMAGEN_NO_EXISTE(1005, "No existe imagen con ese hash");
   
   private final int codigo;
   
