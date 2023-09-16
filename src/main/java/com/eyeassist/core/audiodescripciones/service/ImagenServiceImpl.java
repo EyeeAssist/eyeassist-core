@@ -1,28 +1,55 @@
 package com.eyeassist.core.audiodescripciones.service;
 
+import com.eyeassist.core.audiodescripciones.entity.Imagen;
 import com.eyeassist.core.audiodescripciones.model.ImagenDto;
 import com.eyeassist.core.audiodescripciones.repository.ImagenRepository;
 import com.eyeassist.core.config.exception.MyException;
 import com.eyeassist.core.shared.model.util.Error;
+import jakarta.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@Transactional
 public class ImagenServiceImpl implements ImagenService {
   
   @Autowired
   ImagenRepository imagenRepository;
   
   @Override
-  public ImagenDto getDtoByImagen(MultipartFile imagen) {
+  public Imagen create(MultipartFile archivo, String hash) {
+    Imagen imagen = new Imagen();
+    //TODO: Reemplazar por id del usuario en sesión
+    imagen.setIdUsuario(UUID.fromString("3bd9127c-1b92-11ee-be56-0242ac100001"));
+    imagen.setHash(hash);
+    //TODO: Reemplazar descripción de prueba por el método para generar la descripción
+    imagen.setDescripcion("Descripción de prueba");
+    System.out.println(imagen.toString());
+    return imagenRepository.save(imagen);
+  }
+  
+  @Override
+  public ImagenDto getOrCreateByImagen(MultipartFile imagen) {
     String hash = generarHashDeImagen(imagen);
     System.out.println("Hash: " + hash);
-    return imagenRepository.findDtoByHash(hash).orElseThrow(() -> new MyException(Error.IMAGEN_NO_EXISTE));
+    Optional<ImagenDto> imagenDto = imagenRepository.findDtoByHash(hash);
+    return imagenDto.orElseGet(() -> fromEntityToDto(create(imagen, hash)));
+  }
+  
+  private ImagenDto fromEntityToDto(Imagen imagen) {
+    ImagenDto imagenDto = new ImagenDto();
+    imagenDto.setId(imagen.getId());
+    imagenDto.setIdUsuario(imagen.getIdUsuario());
+    imagenDto.setHash(imagen.getHash());
+    imagenDto.setDescripcion(imagen.getDescripcion());
+    return imagenDto;
   }
   
   private String generarHashDeImagen(MultipartFile file) {

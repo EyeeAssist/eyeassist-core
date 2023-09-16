@@ -9,11 +9,12 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ImagenRepository extends JpaRepository<Imagen, UUID> {
   
-  @Query("SELECT "
-      + "        img.id AS id, "
-      + "        img.idUsuario AS idUsuario, "
-      + "        img.hash AS hash, "
-      + "        img.descripcion AS descripcion "
+  @Query("SELECT new com.eyeassist.core.audiodescripciones.model.ImagenDto( "
+      + "        img.id, "
+      + "        img.idUsuario, "
+      + "        img.hash, "
+      + "        img.descripcion "
+      + "        ) "
       + "   FROM Imagen img "
       + "  WHERE img.hash = :hash ")
   Optional<ImagenDto> findDtoByHash(String hash);
