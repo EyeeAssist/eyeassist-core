@@ -3,7 +3,7 @@ package com.eyeassist.core.audiodescripciones.service;
 import com.eyeassist.core.audiodescripciones.model.VideoDto;
 import com.eyeassist.core.audiodescripciones.repository.VideoRepository;
 import com.eyeassist.core.config.exception.MyException;
-import com.eyeassist.core.shared.model.util.Error;
+import com.eyeassist.core.shared.util.Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

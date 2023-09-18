@@ -4,7 +4,7 @@ import com.eyeassist.core.auth.entity.Usuario;
 import com.eyeassist.core.auth.model.AuthenticationRequest;
 import com.eyeassist.core.auth.model.Sesion;
 import com.eyeassist.core.config.exception.MyException;
-import com.eyeassist.core.shared.model.util.Error;
+import com.eyeassist.core.shared.util.Error;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

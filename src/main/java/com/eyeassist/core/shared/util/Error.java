@@ -1,4 +1,4 @@
-package com.eyeassist.core.shared.model.util;
+package com.eyeassist.core.shared.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
