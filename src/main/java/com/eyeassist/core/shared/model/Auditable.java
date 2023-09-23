@@ -5,6 +5,7 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
+import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -20,14 +21,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public abstract class Auditable {
   
   @CreatedBy
-  protected String creadoPor;
+  protected UUID creadoPor;
   
   @CreatedDate
   @Temporal(TemporalType.TIMESTAMP)
   protected Date fechaHoraCreacion;
   
   @LastModifiedBy
-  protected String actualizadoPor;
+  protected UUID actualizadoPor;
   
   @LastModifiedDate
   @Temporal(TemporalType.TIMESTAMP)

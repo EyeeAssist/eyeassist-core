@@ -32,17 +32,19 @@ public class AuthServiceImpl implements AuthService {
   
   @Override
   public Sesion authenticate(AuthenticationRequest request) {
+    
+    Usuario usuario;
+    
     try {
+      usuario = usuarioService.getByCorreo(request.getCorreo());
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-          request.getCorreo(),
+          usuario.getId(),
           request.getContrasenia()));
     } catch (BadCredentialsException e) {
       throw new MyException(Error.CREDENCIALES_INCORRECTAS);
     }
     
-    final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getCorreo());
-    
-    Usuario usuario = usuarioService.getByCorreo(request.getCorreo());
+    final UserDetails userDetails = userDetailsService.loadUserByUsername(usuario.getId().toString());
     String nombre = usuario.getNombres() + " " + usuario.getApellidos();
     
     final String token = jwtUtilService.generateToken(userDetails);

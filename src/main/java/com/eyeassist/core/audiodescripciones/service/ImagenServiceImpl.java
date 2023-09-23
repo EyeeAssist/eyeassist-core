@@ -3,6 +3,7 @@ package com.eyeassist.core.audiodescripciones.service;
 import com.eyeassist.core.audiodescripciones.entity.Imagen;
 import com.eyeassist.core.audiodescripciones.model.ImagenDto;
 import com.eyeassist.core.audiodescripciones.repository.ImagenRepository;
+import com.eyeassist.core.config.security.SecurityContext;
 import jakarta.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,8 +25,7 @@ public class ImagenServiceImpl implements ImagenService {
   @Override
   public Imagen create(MultipartFile archivo, String hash) {
     Imagen imagen = new Imagen();
-    //TODO: Reemplazar por id del usuario en sesión
-    imagen.setIdUsuario(UUID.fromString("3bd9127c-1b92-11ee-be56-0242ac100001"));
+    imagen.setIdUsuario(SecurityContext.getIdUsuario());
     imagen.setHash(hash);
     //TODO: Reemplazar descripción de prueba por el método para generar la descripción
     imagen.setDescripcion("Descripción de prueba");
