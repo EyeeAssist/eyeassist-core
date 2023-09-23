@@ -1,6 +1,6 @@
 package com.eyeassist.core.config.exception;
 
-import com.eyeassist.core.shared.model.util.Error;
+import com.eyeassist.core.shared.util.Error;
 import lombok.Getter;
 import org.springframework.validation.BindingResult;
 

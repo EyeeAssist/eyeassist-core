@@ -3,7 +3,8 @@ package com.eyeassist.core.auth.service;
 import com.eyeassist.core.auth.entity.Usuario;
 import com.eyeassist.core.auth.repository.UsuarioRepository;
 import com.eyeassist.core.config.exception.MyException;
-import com.eyeassist.core.shared.model.util.Error;
+import com.eyeassist.core.shared.util.Error;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,12 @@ public class UsuarioServiceImpl implements UsuarioService {
   @Override
   public Usuario getByCorreo(String correo) {
     return usuarioRepository.getByCorreo(correo.toLowerCase())
+        .orElseThrow(() -> new MyException(Error.USUARIO_NO_EXISTE));
+  }
+  
+  @Override
+  public Usuario getById(UUID id) {
+    return usuarioRepository.findById(id)
         .orElseThrow(() -> new MyException(Error.USUARIO_NO_EXISTE));
   }
   

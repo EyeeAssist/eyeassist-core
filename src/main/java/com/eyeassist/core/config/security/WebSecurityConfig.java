@@ -27,7 +27,6 @@ public class WebSecurityConfig {
         .authorizeHttpRequests(authorize -> authorize
             .requestMatchers("/auth/**").permitAll()
             .requestMatchers("/videos/**").permitAll()
-            .requestMatchers("/imagenes/**").permitAll()
             .anyRequest().authenticated()
         )
         .sessionManagement(session -> session

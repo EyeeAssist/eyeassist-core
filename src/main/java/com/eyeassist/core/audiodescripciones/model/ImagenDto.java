@@ -1,15 +1,25 @@
 package com.eyeassist.core.audiodescripciones.model;
 
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-public interface ImagenDto {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class ImagenDto {
   
-  UUID getId();
+  private UUID id;
   
-  UUID getIdUsuario();
+  private UUID idUsuario;
   
-  String getHash();
+  private String hash;
   
-  String getDescripcion();
+  private String descripcion;
   
 }
