@@ -1,11 +1,14 @@
 package com.eyeassist.core.audiodescripciones.service;
 
+import com.eyeassist.core.audiodescripciones.entity.Video;
 import com.eyeassist.core.audiodescripciones.model.VideoDto;
+import com.eyeassist.core.audiodescripciones.model.VideoRequest;
 import com.eyeassist.core.audiodescripciones.repository.VideoRepository;
 import com.eyeassist.core.config.exception.MyException;
 import com.eyeassist.core.config.security.SecurityContext;
 import com.eyeassist.core.shared.model.PageableQuery;
 import com.eyeassist.core.shared.util.Error;
+import com.eyeassist.core.shared.util.Estado.EstadoVideo;
 import com.eyeassist.core.shared.util.PageableUtils;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,21 @@ public class VideoServiceImpl implements VideoService {
   
   @Autowired
   VideoRepository videoRepository;
+  
+  @Autowired
+  VideoAsyncService videoAsyncService;
+  
+  @Override
+  public Video create(VideoRequest request) {
+    Video video = Video.builder()
+        .idUsuario(SecurityContext.getIdUsuario())
+        .codigo(request.getCodigo())
+        .estado(EstadoVideo.EN_PROCESO)
+        .build();
+    video = videoRepository.save(video);
+    videoAsyncService.generarDescripcion(video);
+    return video;
+  }
   
   @Override
   public Page<VideoDto> getAllDto(PageableQuery pageableQuery) {

@@ -4,8 +4,8 @@ SET @ID_SUPER_ADMIN = UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac100001');
 
 -- Videos
 
-INSERT INTO video (id, id_usuario, codigo, descripcion, fecha_hora_creacion, creado_por, fecha_hora_actualizacion, actualizado_por) VALUES
-(UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac110001'), UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac100003'), 'aqn1aKxYCPQ', '{"items":[{"inicio":"3000","descripcion":"Dos hombres conversando en una calle de noche"},{"inicio":"37000","descripcion":"Un hombre cae sobre un charco sucio"},{"inicio":"70000","descripcion":"Un hombre observa un anillo en su mano"}]}', SYSDATE(), @ID_SUPER_ADMIN, SYSDATE(), @ID_SUPER_ADMIN);
+INSERT INTO video (id, id_usuario, codigo, descripcion, estado, fecha_hora_creacion, creado_por, fecha_hora_actualizacion, actualizado_por) VALUES
+(UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac110001'), UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac100003'), 'aqn1aKxYCPQ', '{"items":[{"inicio":"3000","descripcion":"Dos hombres conversando en una calle de noche"},{"inicio":"37000","descripcion":"Un hombre cae sobre un charco sucio"},{"inicio":"70000","descripcion":"Un hombre observa un anillo en su mano"}]}', 'PROCESADO', SYSDATE(), @ID_SUPER_ADMIN, SYSDATE(), @ID_SUPER_ADMIN);
 
 -- Imágenes
 

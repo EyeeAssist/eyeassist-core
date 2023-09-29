@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `video` (
   `id_usuario` BINARY(16) NOT NULL,
   `codigo` VARCHAR(11) NOT NULL,
   `descripcion` JSON NULL,
+  `estado` VARCHAR(20) NOT NULL,
   `fecha_hora_creacion` DATETIME NOT NULL,
   `creado_por` BINARY(16) NOT NULL,
   `fecha_hora_actualizacion` DATETIME NOT NULL,
