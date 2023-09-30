@@ -13,4 +13,6 @@ public class VideoRequest {
   @NotNull(message = "El campo codigo es requerido")
   private String codigo;
   
+  private String descripcion;
+  
 }

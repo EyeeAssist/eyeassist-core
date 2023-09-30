@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,12 @@ public class VideoRest {
   public VideoDto getDtoByCodigo(@PathVariable String codigo) {
     logger.debug("Obteniendo video con id {}", codigo);
     return videoService.getDtoByCodigo(codigo);
+  }
+  
+  @PutMapping("/{id}")
+  public UUID update(@PathVariable UUID id, @RequestBody VideoRequest request) {
+    logger.debug("Actualizando descripción de video con id {}", id);
+    return videoService.update(id, request).getId();
   }
   
 }

@@ -4,6 +4,7 @@ import com.eyeassist.core.audiodescripciones.entity.Video;
 import com.eyeassist.core.audiodescripciones.model.VideoDto;
 import com.eyeassist.core.audiodescripciones.model.VideoRequest;
 import com.eyeassist.core.shared.model.PageableQuery;
+import java.util.UUID;
 import org.springframework.data.domain.Page;
 
 public interface VideoService {
@@ -13,5 +14,7 @@ public interface VideoService {
   Page<VideoDto> getAllDto(PageableQuery pageableQuery);
   
   VideoDto getDtoByCodigo(String codigo);
+  
+  Video update(UUID id, VideoRequest request);
   
 }

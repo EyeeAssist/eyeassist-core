@@ -10,6 +10,7 @@ import com.eyeassist.core.shared.model.PageableQuery;
 import com.eyeassist.core.shared.util.Error;
 import com.eyeassist.core.shared.util.Estado.EstadoVideo;
 import com.eyeassist.core.shared.util.PageableUtils;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,6 +48,17 @@ public class VideoServiceImpl implements VideoService {
   @Override
   public VideoDto getDtoByCodigo(String codigo) {
     return videoRepository.findDtoById(codigo).orElseThrow(() -> new MyException(Error.VIDEO_NO_EXISTE));
+  }
+  
+  @Override
+  public Video update(UUID id, VideoRequest request) {
+    Optional<Video> optVideo = videoRepository.findById(id);
+    if (optVideo.isEmpty()) {
+      throw new MyException(Error.VIDEO_NO_EXISTE);
+    }
+    Video video = optVideo.get();
+    video.setDescripcion(request.getDescripcion());
+    return videoRepository.save(video);
   }
   
 }
