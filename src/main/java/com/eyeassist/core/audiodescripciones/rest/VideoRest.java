@@ -44,6 +44,12 @@ public class VideoRest {
     return videoService.getDtoByCodigo(codigo);
   }
   
+  @GetMapping("/total")
+  public Long countByIdUsuario() {
+    logger.debug("Obteniendo el número de registros del usuario en sesión");
+    return videoService.countByIdUsuario();
+  }
+  
   @PutMapping("/{id}")
   public UUID update(@PathVariable UUID id, @RequestBody VideoRequest request) {
     logger.debug("Actualizando descripción de video con id {}", id);

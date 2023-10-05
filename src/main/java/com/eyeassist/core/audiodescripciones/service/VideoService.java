@@ -15,6 +15,8 @@ public interface VideoService {
   
   VideoDto getDtoByCodigo(String codigo);
   
+  Long countByIdUsuario();
+  
   Video update(UUID id, VideoRequest request);
   
 }

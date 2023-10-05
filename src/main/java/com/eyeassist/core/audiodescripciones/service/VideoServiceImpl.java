@@ -51,6 +51,12 @@ public class VideoServiceImpl implements VideoService {
   }
   
   @Override
+  public Long countByIdUsuario() {
+    UUID idUsuario = SecurityContext.getIdUsuario();
+    return videoRepository.countByIdUsuario(idUsuario);
+  }
+  
+  @Override
   public Video update(UUID id, VideoRequest request) {
     Optional<Video> optVideo = videoRepository.findById(id);
     if (optVideo.isEmpty()) {
