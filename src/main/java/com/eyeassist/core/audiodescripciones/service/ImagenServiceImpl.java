@@ -41,6 +41,12 @@ public class ImagenServiceImpl implements ImagenService {
     return imagenDto.orElseGet(() -> fromEntityToDto(create(imagen, hash)));
   }
   
+  @Override
+  public Long countByIdUsuario() {
+    UUID idUsuario = SecurityContext.getIdUsuario();
+    return imagenRepository.countByIdUsuario(idUsuario);
+  }
+  
   private ImagenDto fromEntityToDto(Imagen imagen) {
     ImagenDto imagenDto = new ImagenDto();
     imagenDto.setId(imagen.getId());

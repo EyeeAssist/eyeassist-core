@@ -5,6 +5,7 @@ import com.eyeassist.core.audiodescripciones.service.ImagenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -24,6 +25,12 @@ public class ImagenRest {
   public ImagenDto getOrCreateByImagen(@RequestPart(name = "file") MultipartFile imagen) {
     logger.debug("Obteniendo una imagen con {}", imagen);
     return imagenService.getOrCreateByImagen(imagen);
+  }
+  
+  @GetMapping("/total")
+  public Long countByIdUsuario() {
+    logger.debug("Obteniendo el número de registros de descripciones de imágenes del usuario en sesión");
+    return imagenService.countByIdUsuario();
   }
   
 }

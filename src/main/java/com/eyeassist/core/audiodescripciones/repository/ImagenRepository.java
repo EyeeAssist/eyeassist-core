@@ -19,4 +19,6 @@ public interface ImagenRepository extends JpaRepository<Imagen, UUID> {
       + "  WHERE img.hash = :hash ")
   Optional<ImagenDto> findDtoByHash(String hash);
   
+  long countByIdUsuario(UUID idUsuario);
+  
 }

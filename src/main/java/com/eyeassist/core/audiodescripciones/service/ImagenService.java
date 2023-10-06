@@ -10,4 +10,6 @@ public interface ImagenService {
   
   ImagenDto getOrCreateByImagen(MultipartFile imagen);
   
+  Long countByIdUsuario();
+  
 }
