@@ -8,6 +8,7 @@ import com.eyeassist.core.config.exception.MyException;
 import com.eyeassist.core.config.security.SecurityContext;
 import com.eyeassist.core.shared.model.PageableQuery;
 import com.eyeassist.core.shared.util.Error;
+import com.eyeassist.core.shared.util.Estado.Entidad;
 import com.eyeassist.core.shared.util.Estado.EstadoVideo;
 import com.eyeassist.core.shared.util.PageableUtils;
 import java.util.Optional;
@@ -25,6 +26,9 @@ public class VideoServiceImpl implements VideoService {
   
   @Autowired
   VideoAsyncService videoAsyncService;
+  
+  @Autowired
+  EstadisticaService estadisticaService;
   
   @Override
   public Video create(VideoRequest request) {
@@ -47,6 +51,7 @@ public class VideoServiceImpl implements VideoService {
   
   @Override
   public VideoDto getDtoByCodigo(String codigo) {
+    estadisticaService.addToContador(Entidad.VIDEO);
     return videoRepository.findDtoById(codigo).orElseThrow(() -> new MyException(Error.VIDEO_NO_EXISTE));
   }
   

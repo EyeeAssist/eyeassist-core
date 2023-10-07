@@ -4,6 +4,7 @@ import com.eyeassist.core.audiodescripciones.entity.Imagen;
 import com.eyeassist.core.audiodescripciones.model.ImagenDto;
 import com.eyeassist.core.audiodescripciones.repository.ImagenRepository;
 import com.eyeassist.core.config.security.SecurityContext;
+import com.eyeassist.core.shared.util.Estado.Entidad;
 import jakarta.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +23,9 @@ public class ImagenServiceImpl implements ImagenService {
   @Autowired
   ImagenRepository imagenRepository;
   
+  @Autowired
+  EstadisticaService estadisticaService;
+  
   @Override
   public Imagen create(MultipartFile archivo, String hash) {
     Imagen imagen = new Imagen();
@@ -38,6 +42,7 @@ public class ImagenServiceImpl implements ImagenService {
     String hash = generarHashDeImagen(imagen);
     System.out.println("Hash: " + hash);
     Optional<ImagenDto> imagenDto = imagenRepository.findDtoByHash(hash);
+    estadisticaService.addToContador(Entidad.IMAGEN);
     return imagenDto.orElseGet(() -> fromEntityToDto(create(imagen, hash)));
   }
   

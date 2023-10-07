@@ -8,4 +8,10 @@ public class Estado {
   
   }
   
+  public enum Entidad {
+    
+    IMAGEN, VIDEO
+    
+  }
+  
 }

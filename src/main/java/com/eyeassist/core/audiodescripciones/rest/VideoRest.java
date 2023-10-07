@@ -1,9 +1,12 @@
 package com.eyeassist.core.audiodescripciones.rest;
 
+import com.eyeassist.core.audiodescripciones.model.EstadisticaDto;
 import com.eyeassist.core.audiodescripciones.model.VideoDto;
 import com.eyeassist.core.audiodescripciones.model.VideoRequest;
+import com.eyeassist.core.audiodescripciones.service.EstadisticaService;
 import com.eyeassist.core.audiodescripciones.service.VideoService;
 import com.eyeassist.core.shared.model.PageableQuery;
+import com.eyeassist.core.shared.util.Estado.Entidad;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +29,9 @@ public class VideoRest {
   @Autowired
   VideoService videoService;
   
+  @Autowired
+  EstadisticaService estadisticaService;
+  
   @PostMapping
   public UUID create(@RequestBody VideoRequest request) {
     logger.debug("Creando la descripción de un video con código {}", request);
@@ -42,6 +48,12 @@ public class VideoRest {
   public VideoDto getDtoByCodigo(@PathVariable String codigo) {
     logger.debug("Obteniendo video con id {}", codigo);
     return videoService.getDtoByCodigo(codigo);
+  }
+  
+  @GetMapping("/estadisticas")
+  public EstadisticaDto getEstadistica() {
+    logger.debug("Obteniendo la estadística de consulta de videos");
+    return estadisticaService.getDtoByEntidad(Entidad.VIDEO);
   }
   
   @GetMapping("/total")
