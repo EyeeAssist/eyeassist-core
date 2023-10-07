@@ -1,6 +1,7 @@
 package com.eyeassist.core.auth.service;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
@@ -40,21 +41,23 @@ public class JwtUtilService {
     return extractExpiration(token).before(new Date());
   }
   
-  public String generateToken(UserDetails userDetails) {
+  public String generateToken(UserDetails userDetails, boolean conExpiracion) {
     Map<String, Object> claims = new HashMap<>();
-    return createToken(claims, userDetails.getUsername());
+    return createToken(claims, userDetails.getUsername(), conExpiracion);
   }
   
-  private String createToken(Map<String, Object> claims, String subject) {
-    long jwtTokenValidity = 1000 * 60 * 60 * Long.parseLong(jwtValidityHours);
-    
-    return Jwts
-        .builder()
+  private String createToken(Map<String, Object> claims, String subject, boolean conExpiracion) {
+    JwtBuilder jwtBuilder = Jwts.builder()
         .setClaims(claims)
         .setSubject(subject)
-        .setIssuedAt(new Date(System.currentTimeMillis()))
-        .setExpiration(new Date(System.currentTimeMillis() + jwtTokenValidity))
-        .signWith(SignatureAlgorithm.HS256, jwtSecretKey).compact();
+        .setIssuedAt(new Date(System.currentTimeMillis()));
+    
+    if (conExpiracion) {
+      long jwtTokenValidity = 1000 * 60 * 60 * Long.parseLong(jwtValidityHours);
+      jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + jwtTokenValidity));
+    }
+    
+    return jwtBuilder.signWith(SignatureAlgorithm.HS256, jwtSecretKey).compact();
   }
   
   public boolean validateToken(String token, UserDetails userDetails) {
