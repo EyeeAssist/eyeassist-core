@@ -1,5 +1,6 @@
 package com.eyeassist.core.audiodescripciones.model;
 
+import com.eyeassist.core.shared.util.Estado.EstadoVideo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.UUID;
@@ -14,5 +15,7 @@ public interface VideoDto {
   String getCodigo();
   
   String getDescripcion();
+  
+  EstadoVideo getEstado();
 
 }

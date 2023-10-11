@@ -14,7 +14,8 @@ public interface VideoRepository extends JpaRepository<Video, UUID> {
   @Query("SELECT "
       + "        vid.id AS id, "
       + "        vid.codigo AS codigo, "
-      + "        vid.descripcion AS descripcion "
+      + "        vid.descripcion AS descripcion, "
+      + "        vid.estado AS estado "
       + "   FROM Video vid "
       + "  WHERE vid.idUsuario = :idUsuario")
   Page<VideoDto> findAllDto(UUID idUsuario, Pageable pageable);
