@@ -1,7 +1,7 @@
 package com.eyeassist.core.audiodescripciones.entity;
 
 import com.eyeassist.core.shared.model.Auditable;
-import com.eyeassist.core.shared.util.Estado.EstadoVideo;
+import com.eyeassist.core.shared.util.Estado.Entidad;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,14 +14,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
-public class Video extends Auditable {
+public class Estadistica extends Auditable {
   
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -29,11 +31,9 @@ public class Video extends Auditable {
   
   private UUID idUsuario;
   
-  private String codigo;
-  
-  private String descripcion;
-  
   @Enumerated(EnumType.STRING)
-  private EstadoVideo estado;
+  private Entidad entidad;
+  
+  private Integer contador;
   
 }

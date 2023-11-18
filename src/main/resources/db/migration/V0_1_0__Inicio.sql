@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `video` (
   `id_usuario` BINARY(16) NOT NULL,
   `codigo` VARCHAR(11) NOT NULL,
   `descripcion` JSON NULL,
+  `estado` VARCHAR(20) NOT NULL,
   `fecha_hora_creacion` DATETIME NOT NULL,
   `creado_por` BINARY(16) NOT NULL,
   `fecha_hora_actualizacion` DATETIME NOT NULL,
@@ -80,6 +81,28 @@ CREATE TABLE IF NOT EXISTS `video` (
   PRIMARY KEY (`id`),
   INDEX `fk-id_usuario-video-usuario_idx` (`id_usuario` ASC) VISIBLE,
   CONSTRAINT `fk-id_usuario-video-usuario`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `usuario` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `estadistica`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `estadistica` (
+  `id` BINARY(16) NOT NULL,
+  `id_usuario` BINARY(16) NOT NULL,
+  `entidad` VARCHAR(20) NOT NULL,
+  `contador` INT NOT NULL,
+  `fecha_hora_creacion` DATETIME NOT NULL,
+  `creado_por` BINARY(16) NOT NULL,
+  `fecha_hora_actualizacion` DATETIME NOT NULL,
+  `actualizado_por` BINARY(16) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk-id_usuario-estadistica-usuario_idx` (`id_usuario` ASC) VISIBLE,
+  CONSTRAINT `fk-id_usuario-estadistica-usuario`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `usuario` (`id`)
     ON DELETE NO ACTION
@@ -106,4 +129,4 @@ INSERT INTO rol (id, nombre, descripcion) VALUES
 INSERT INTO usuario (id, nombres, apellidos, contrasenia, correo, id_rol, fecha_hora_creacion, creado_por, fecha_hora_actualizacion, actualizado_por) VALUES
 (UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac100001'), 'Hugo', 'Rodriguez', '$2y$10$MCRzCrtO0EUoExXenXZwWOZfFUK3St8BVdnMTau.e6hs8mL5pU6TO', 'U201722123@upc.edu.pe', UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac000001'), SYSDATE(), @ID_SUPER_ADMIN, SYSDATE(), @ID_SUPER_ADMIN),
 (UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac100002'), 'Sebastian', 'Diaz', '$2y$10$MCRzCrtO0EUoExXenXZwWOZfFUK3St8BVdnMTau.e6hs8mL5pU6TO', 'U201717471@upc.edu.pe', UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac000001'), SYSDATE(), @ID_SUPER_ADMIN, SYSDATE(), @ID_SUPER_ADMIN),
-(UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac100003'), 'Enrique', 'Flores', '$2y$10$tnAw7oUAcllMPZsKB6yNS.MWFypSiXjzZjW7qEkDUUKT1gjoe6s4S', 'eflores@gmail.com', UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac000002'), SYSDATE(), @ID_SUPER_ADMIN, SYSDATE(), @ID_SUPER_ADMIN);
+(UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac100003'), 'Enrique', 'Flores', '$2y$10$byWnIUOT/bKTk3FZlXr3TO3swBhNZqvUD5NT09CjCEpdcmZvFLLTO', 'eflores@gmail.com', UUID_TO_BIN('3bd9127c-1b92-11ee-be56-0242ac000002'), SYSDATE(), @ID_SUPER_ADMIN, SYSDATE(), @ID_SUPER_ADMIN);
