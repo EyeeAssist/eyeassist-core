@@ -80,6 +80,12 @@
 			<version>0.11.5</version>
 		</dependency>
 
+		<!-- Dependencia para uso de llamadas HTTP -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

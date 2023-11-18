@@ -11,6 +11,7 @@ import com.eyeassist.core.shared.util.Error;
 import com.eyeassist.core.shared.util.Estado.Entidad;
 import com.eyeassist.core.shared.util.Estado.EstadoVideo;
 import com.eyeassist.core.shared.util.PageableUtils;
+import jakarta.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class VideoServiceImpl implements VideoService {
   
   @Autowired
@@ -37,8 +39,16 @@ public class VideoServiceImpl implements VideoService {
         .codigo(request.getCodigo())
         .estado(EstadoVideo.EN_PROCESO)
         .build();
+    
+    UUID idUsuario = SecurityContext.getIdUsuario();
+    Optional<Video> optVideo = videoRepository.findByCodigoAndIdUsuario(request.getCodigo(), idUsuario);
+    
+    if (optVideo.isPresent()) {
+      throw new MyException(Error.VIDEO_YA_EXISTE_CODIGO);
+    }
+    
     video = videoRepository.save(video);
-    videoAsyncService.generarDescripcion(video);
+    videoAsyncService.generarDescripcion(request, video);
     return video;
   }
   

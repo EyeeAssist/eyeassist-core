@@ -29,7 +29,7 @@ public interface VideoRepository extends JpaRepository<Video, UUID> {
       + "  WHERE vid.codigo = :codigo ")
   Optional<VideoDto> findDtoById(String codigo);
   
-  Optional<Video> findByCodigo(String codigo);
+  Optional<Video> findByCodigoAndIdUsuario(String codigo, UUID idUsuario);
   
   long countByIdUsuario(UUID id);
   
