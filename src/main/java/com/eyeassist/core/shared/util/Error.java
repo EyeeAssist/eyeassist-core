@@ -15,7 +15,9 @@ public enum Error {
   
   VIDEO_NO_EXISTE(1004, "No existe video con ese codigo"),
   
-  IMAGEN_NO_EXISTE(1005, "No existe imagen con ese hash");
+  IMAGEN_NO_EXISTE(1005, "No existe imagen con ese hash"),
+  
+  VIDEO_YA_EXISTE_CODIGO(1006, "Ya existe una descripción para el video con ese ID");
   
   private final int codigo;
   
